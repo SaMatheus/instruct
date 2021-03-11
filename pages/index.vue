@@ -1,14 +1,12 @@
 <template>
-  <div class="leads">
+  <div id="app" class="leads">
     <Logo />
     <!-- <Logo dark-background /> -->
     <h1 class="leads__title">Leads</h1>
     <div class="leads__filter">
-      <input name="search" type="text" v-model.trim="search">
-      <button type="submit">Procurar</button>
+      <input name="search" type="text" v-model.trim="search" placeholder="Procure aqui">
     </div>
-    {{search}}
-    <table class="leads__table">
+    <table v-if="leads.length" class="leads__table">
       <thead>
         <tr>
           <td></td>
@@ -17,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="lead of searchResult" :key="lead.id">
+        <tr v-for="lead in searchResult" :key="lead.id">
           <td>{{ lead.id }}</td>
           <td>
             <p>Nome: {{ lead.name }}</p>
@@ -35,24 +33,20 @@
 <script>
 import axios from 'axios'
 export default {
+  name: 'app',
   data () {
     return {
-      leads: [],
-      search: ''
+      search: null,
+      leads: []
     }
   },
   mounted () {
     this.getData()
   },
   methods: {
-    filterLeadsData () {
-      this.leads.map((lead) => { return console.log(lead.company.bs) })
-    },
     async getData () {
       await axios.get('https://jsonplaceholder.typicode.com/users').then((response) => {
         this.leads = response.data
-        this.filteredLeads = response.data
-        console.log(response)
       })
     }
   },
@@ -60,7 +54,7 @@ export default {
     searchResult () {
       if (this.search) {
         return this.leads.filter((lead) => {
-          return this.search.toLowerCase().split(' ').every(v => lead.title.toLowerCase().includes(v))
+          return this.search.toLowerCase().split(' ').every(valid => lead.name.toLowerCase().includes(valid))
         })
       } else {
         return this.leads
