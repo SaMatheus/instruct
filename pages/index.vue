@@ -10,7 +10,7 @@
 export default {}
 </script>
 
-<style lang="scss" scoped="true">
+<style lang="scss" scoped>
 .leads {
   &__title {
     margin: 1.4rem 0;
