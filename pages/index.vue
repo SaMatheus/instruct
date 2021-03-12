@@ -6,32 +6,13 @@
     <div class="leads__filter">
       <input name="search" type="text" v-model.trim="search" placeholder="Procure aqui">
     </div>
-    <table v-if="leads.length" class="leads__table">
-      <thead>
-        <tr>
-          <td></td>
-          <td><h1>Cliente</h1></td>
-          <td><h1>Contato</h1></td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="lead in searchResult" :key="lead.id">
-          <td>{{ lead.id }}</td>
-          <td>
-            <p>Nome: {{ lead.name }}</p>
-            <p>Empresa: {{ lead.company.name }}</p></td>
-          <td>
-            <p>Telefone: {{ lead.phone }}</p>
-            <p>E-mail: {{ lead.email }}</p>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <BaseListLeads :leads="searchLeadsResult" />
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+// import BaseList from '~/components/BaseList.vue'
 export default {
   name: 'app',
   data () {
@@ -51,14 +32,25 @@ export default {
     }
   },
   computed: {
-    searchResult () {
+    searchLeadsResult () {
       if (this.search) {
         return this.leads.filter((lead) => {
-          return this.search.toLowerCase().split(' ').every(valid => lead.name.toLowerCase().includes(valid))
+          const phone = this.search.toLowerCase().split(' ').every(valid => lead.phone.toLowerCase().includes(valid))
+          const email = this.search.toLowerCase().split(' ').every(valid => lead.email.toLowerCase().includes(valid))
+          const name = this.search.toLowerCase().split(' ').every(valid => lead.name.toLowerCase().includes(valid))
+          const bs = this.search.toLowerCase().split(' ').every(valid => lead.company.bs.toLowerCase().includes(valid))
+          if (phone) {
+            return phone
+          } if (email) {
+            return email
+          } if (name) {
+            return name
+          } else {
+            return bs
+          }
         })
-      } else {
-        return this.leads
       }
+      return this.leads
     }
   }
 }
@@ -71,12 +63,8 @@ export default {
     padding: 1.4rem 0;
     border-top: $border-color 1px solid;
   }
-  &__table {
-    border: 1px solid black;
-    width: 100%;
-    td {
-      border: 1px solid black;
-    }
+  &__filter {
+    margin: 1.4rem 0;
   }
 }
 </style>
