@@ -4,12 +4,26 @@
     <!-- <Logo dark-background /> -->
     <h1 class="leads__title">Leads</h1>
     <div class="leads__filter">
-      <input
-        name="search"
-        type="text"
-        v-model.trim="search"
-        placeholder="Procure aqui"
-      />
+      <label for="searchForName">
+        <p>Name</p>
+        <input
+          id="searchForName"
+          type="text"
+          v-model.trim="search"
+          placeholder="Search here"
+        />
+        <span>Search for name, phone or email</span>
+      </label>
+      <label for="searchForCompany">
+        <p>Company</p>
+        <input
+          id="searchForCompany"
+          type="text"
+          v-model.trim="search"
+          placeholder="Search here"
+        />
+        <span>Search for company name or category</span>
+      </label>
     </div>
     <BaseListLeads :leads="searchLeadsResult" />
   </div>
@@ -79,12 +93,66 @@ export default {
 <style lang="scss" scoped>
 .leads {
   &__title {
+    /* BOX MODEL */
     margin: 1.4rem 0;
     padding: 1.4rem 0;
     border-top: $border-color 1px solid;
   }
   &__filter {
-    margin: 1.4rem 0;
+    /* BOX MODEL */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 0 2rem;
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 0.3rem;
+
+    /* SIZE */
+    max-width: 550px;
+    min-width: 300px;
+
+    /* COLOR */
+    background-color: $light-blue;
+
+    label {
+      /* BOX MODEL */
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      p {
+        /* COLOR */
+        color: $grey;
+        /* SIZE */
+        margin-bottom: 4px;
+      }
+      input {
+        /* SIZE */
+        height: 40px;
+        width: 100%;
+
+        /* BOX MODEL */
+        padding: 0 0.5rem;
+        border: 0;
+        border-radius: 0.3rem;
+
+        /* TEXT */
+        font-size: 1rem;
+
+        /* COLRO */
+        color: $text;
+      }
+      span {
+        /* BOX MODEL */
+        margin-top: 4px;
+
+        /* COLOR */
+        color: $grey;
+
+        /* TEXT */
+        font-size: 0.3rem;
+      }
+    }
   }
 }
 </style>

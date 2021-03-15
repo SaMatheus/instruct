@@ -27,11 +27,21 @@
         </div>
         <div>
           <p>Phone</p>
-          <strong>{{ lead.phone }}</strong>
+          <strong>
+            <a :href="`tel:+${lead.phone}`" target="_blank">
+              {{ lead.phone }}
+            </a>
+          </strong>
+          <p>open on your smartphone</p>
         </div>
         <div>
           <p>E-mail</p>
-          <strong>{{ lead.email }}</strong>
+          <strong>
+            <a :href="`mailto:${lead.email}`" target="_blank">
+              {{ lead.email }}
+            </a>
+          </strong>
+          <p>send an email now</p>
         </div>
         <div>
           <p>Address</p>
@@ -47,11 +57,15 @@
               {{ lead.address.city }}
             </strong>
           </a>
-          click to open in Google Maps
+          <p>click to open in Google Maps</p>
         </div>
         <div>
           <p>Website</p>
-          <strong>{{ lead.website }}</strong>
+          <strong>
+            <a :href="`http://${lead.website}`" target="_blank">
+              {{ lead.website }}
+            </a>
+          </strong>
         </div>
         <div>
           <p>Company category</p>
@@ -102,10 +116,11 @@ export default {
     position: relative;
 
     p {
-      font-size: 1.5rem;
+      /* TEXT */
+      font-size: 1.2rem;
       line-height: 3rem;
       &:nth-child(1) {
-        padding-left: 2.2rem;
+        padding-left: 8px;
       }
     }
 
@@ -188,7 +203,7 @@ export default {
         justify-content: flex-start;
         align-items: center;
         border-radius: none;
-        margin-left: 1.5rem;
+        margin-left: 0.5rem;
         padding-left: 1rem;
 
         &:nth-last-child(1) {
@@ -214,8 +229,8 @@ export default {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    gap: 0.5rem;
-    margin: -1.8rem 0 1rem 0;
+    gap: 1rem 0.5rem;
+    margin: -1.5rem 0 1rem 0;
     padding: 1.5rem;
     border-radius: 0.5rem;
 
@@ -230,6 +245,11 @@ export default {
       p {
         color: $text;
       }
+      p:nth-last-child(1) {
+        font-size: 0.5rem;
+        opacity: 0.5;
+      }
+
       a,
       strong {
         color: $dark-blue;
