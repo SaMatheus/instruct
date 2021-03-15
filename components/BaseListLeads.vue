@@ -103,6 +103,7 @@ export default {
 <style lang="scss" scoped>
 .list {
   margin-top: 3rem;
+
   header {
     /* BOX-MODEL */
     display: grid;
@@ -206,12 +207,38 @@ export default {
         border-radius: none;
         margin-left: 0.5rem;
         padding-left: 1rem;
+        padding-right: 1.5rem;
+
+        /* POSITION */
+        position: relative;
+
+        &:after {
+          content: '';
+          display: inline-block;
+          height: 40%;
+          width: 1px;
+          background: $text;
+          position: absolute;
+          right: 1rem;
+          opacity: 0.2;
+        }
 
         &:nth-last-child(1) {
           /* BOX-MODEL */
           border-radius: 0 0.3rem 0.3rem 0;
           margin-left: 0;
           padding-left: 0;
+
+          &:after {
+            display: none;
+          }
+        }
+
+        @media (max-width: 420px) {
+          padding-left: 0.2rem;
+          &:nth-last-child(1) {
+            padding: 0;
+          }
         }
       }
 

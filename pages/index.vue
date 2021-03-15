@@ -14,7 +14,7 @@
             v-model.trim="searchName"
             placeholder="Search"
           />
-          <span>Search for name, phone or email</span>
+          <span>Search for lead name</span>
         </label>
         <label for="searchForCompany">
           <p>Company</p>
@@ -24,7 +24,7 @@
             v-model.trim="searchCompany"
             placeholder="Search"
           />
-          <span>Search for company name or category</span>
+          <span>Search for company category</span>
         </label>
       </div>
     </div>
@@ -65,22 +65,7 @@ export default {
             .toLowerCase()
             .split(' ')
             .every(valid => lead.name.toLowerCase().includes(valid))
-          const phone = this.searchName
-            .toLowerCase()
-            .split(' ')
-            .every(valid => lead.phone.toLowerCase().includes(valid))
-          const email = this.searchName
-            .toLowerCase()
-            .split(' ')
-            .every(valid => lead.email.toLowerCase().includes(valid))
-          if (name) {
-            return name
-          }
-          if (phone) {
-            return phone
-          } else {
-            return email
-          }
+          return name
         })
       }
       return this.leads
@@ -88,19 +73,11 @@ export default {
     searchCompanyResult() {
       if (this.searchCompany) {
         return this.leads.filter(lead => {
-          const companyName = this.searchCompany
-            .toLowerCase()
-            .split(' ')
-            .every(valid => lead.company.name.toLowerCase().includes(valid))
-          const bs = this.searchCompany
+          const companyBs = this.searchCompany
             .toLowerCase()
             .split(' ')
             .every(valid => lead.company.bs.toLowerCase().includes(valid))
-          if (companyName) {
-            return companyName
-          } else {
-            return bs
-          }
+          return companyBs
         })
       }
       return this.leads
@@ -131,7 +108,7 @@ export default {
     min-width: 200px;
 
     /* COLOR */
-    background-color: $light-blue;
+    background: $light-blue;
 
     h3 {
       /* COLOR */
@@ -141,7 +118,7 @@ export default {
       font-size: 2rem;
 
       /* BOX MODEL */
-      margin-bottom: 16px;
+      margin-bottom: 8px;
     }
 
     div {
@@ -160,6 +137,10 @@ export default {
       p {
         /* COLOR */
         color: $grey;
+
+        /* TEXT */
+        font-size: 1.2rem;
+
         /* SIZE */
         margin-bottom: 4px;
       }
