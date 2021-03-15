@@ -2,7 +2,7 @@
   <div class="list">
     <header>
       <p>Name</p>
-      <p>Company</p>
+      <p>Company category</p>
     </header>
     <ul class="list__ul" v-for="lead in leads" :key="lead.id">
       <li
@@ -13,7 +13,7 @@
       >
         <span>{{ lead.id }}</span>
         <p>{{ lead.name }}</p>
-        <p>{{ lead.company.name }}</p>
+        <p>{{ lead.company.bs }}</p>
       </li>
       <div
         v-if="itemToShow == lead.id && isVisible"
@@ -21,6 +21,10 @@
           list__insideList
         "
       >
+        <div>
+          <p>Company</p>
+          <strong>{{ lead.company.name }}</strong>
+        </div>
         <div>
           <p>Username</p>
           <strong>{{ lead.username }}</strong>
@@ -66,10 +70,6 @@
               {{ lead.website }}
             </a>
           </strong>
-        </div>
-        <div>
-          <p>Company category</p>
-          <strong>{{ lead.company.bs }}</strong>
         </div>
       </div>
     </ul>
@@ -159,6 +159,9 @@ export default {
       /* EFFECT */
       transition: all 0.2s ease;
       cursor: pointer;
+
+      /* TEXT */
+      text-transform: capitalize;
 
       &:hover {
         /* BOX-MODEL */
