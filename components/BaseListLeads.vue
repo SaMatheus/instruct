@@ -102,6 +102,7 @@ export default {
 
 <style lang="scss" scoped>
 .list {
+  margin-top: 3rem;
   header {
     /* BOX-MODEL */
     display: grid;
@@ -118,7 +119,7 @@ export default {
     p {
       /* TEXT */
       font-size: 1.2rem;
-      line-height: 3rem;
+      line-height: 2rem;
       &:nth-child(1) {
         padding-left: 8px;
       }
@@ -163,7 +164,7 @@ export default {
         padding-left: 2rem;
       }
 
-      @media (max-width: 600px) {
+      @media (max-width: 800px) {
         &:hover {
           /* BOX-MODEL */
           padding-left: 0;
@@ -255,6 +256,10 @@ export default {
         color: $dark-blue;
         text-decoration: none;
       }
+    }
+
+    @media (max-width: 420px) {
+      grid-template-columns: 1fr;
     }
   }
 }

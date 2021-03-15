@@ -4,28 +4,33 @@
     <!-- <Logo dark-background /> -->
     <h1 class="leads__title">Leads</h1>
     <div class="leads__filter">
-      <label for="searchForName">
-        <p>Name</p>
-        <input
-          id="searchForName"
-          type="text"
-          v-model.trim="searchName"
-          placeholder="Search"
-        />
-        <span>Search for name, phone or email</span>
-      </label>
-      <label for="searchForCompany">
-        <p>Company</p>
-        <input
-          id="searchForCompany"
-          type="text"
-          v-model.trim="searchCompany"
-          placeholder="Search"
-        />
-        <span>Search for company name or category</span>
-      </label>
+      <h3>Filters</h3>
+      <div>
+        <label for="searchForName">
+          <p>Name</p>
+          <input
+            id="searchForName"
+            type="text"
+            v-model.trim="searchName"
+            placeholder="Search"
+          />
+          <span>Search for name, phone or email</span>
+        </label>
+        <label for="searchForCompany">
+          <p>Company</p>
+          <input
+            id="searchForCompany"
+            type="text"
+            v-model.trim="searchCompany"
+            placeholder="Search"
+          />
+          <span>Search for company name or category</span>
+        </label>
+      </div>
     </div>
-    <BaseListLeads :leads="searchNameResult && searchCompanyResult" />
+    <BaseListLeads
+      :leads="searchName ? searchNameResult : searchCompanyResult"
+    />
   </div>
 </template>
 
@@ -114,9 +119,8 @@ export default {
   }
   &__filter {
     /* BOX MODEL */
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
     gap: 0 2rem;
     margin: 1rem 0;
     padding: 1rem;
@@ -124,10 +128,29 @@ export default {
 
     /* SIZE */
     max-width: 550px;
-    min-width: 300px;
+    min-width: 200px;
 
     /* COLOR */
     background-color: $light-blue;
+
+    h3 {
+      /* COLOR */
+      color: $green;
+
+      /* TEXT */
+      font-size: 2rem;
+
+      /* BOX MODEL */
+      margin-bottom: 16px;
+    }
+
+    div {
+      /* BOX MODEL */
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 0 2rem;
+    }
 
     label {
       /* BOX MODEL */
@@ -165,6 +188,13 @@ export default {
 
         /* TEXT */
         font-size: 14px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      div {
+        grid-template-columns: 1fr;
+        gap: 1rem 0;
       }
     }
   }
