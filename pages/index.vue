@@ -1,7 +1,6 @@
 <template>
   <div id="app" class="leads">
     <Logo />
-    <!-- <Logo dark-background /> -->
     <h1 class="leads__title">Leads</h1>
     <div class="leads__filter">
       <h3>Filters</h3>
@@ -28,14 +27,12 @@
         </label>
       </div>
     </div>
-    <BaseListLeads
-      :leads="searchName ? searchNameResult : searchCompanyResult"
-    />
+    <BaseListLeads :leads="searchResults" />
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import api from '../services/api'
 export default {
   name: 'app',
   data() {
@@ -50,11 +47,9 @@ export default {
   },
   methods: {
     async getData() {
-      await axios('https://jsonplaceholder.typicode.com/users').then(
-        response => {
-          this.leads = response.data
-        }
-      )
+      await api('users').then(response => {
+        this.leads = response.data
+      })
     }
   },
   computed: {
@@ -64,7 +59,7 @@ export default {
           const name = this.searchName
             .toLowerCase()
             .split(' ')
-            .every(valid => lead.name.toLowerCase().includes(valid))
+            .every(curr => lead.name.toLowerCase().includes(curr))
           return name
         })
       }
@@ -81,6 +76,9 @@ export default {
         })
       }
       return this.leads
+    },
+    searchResults() {
+      return this.searchName ? this.searchNameResult : this.searchCompanyResult
     }
   }
 }
