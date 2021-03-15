@@ -9,8 +9,8 @@
         <input
           id="searchForName"
           type="text"
-          v-model.trim="search"
-          placeholder="Search here"
+          v-model.trim="searchName"
+          placeholder="Search"
         />
         <span>Search for name, phone or email</span>
       </label>
@@ -19,13 +19,13 @@
         <input
           id="searchForCompany"
           type="text"
-          v-model.trim="search"
-          placeholder="Search here"
+          v-model.trim="searchCompany"
+          placeholder="Search"
         />
         <span>Search for company name or category</span>
       </label>
     </div>
-    <BaseListLeads :leads="searchLeadsResult" />
+    <BaseListLeads :leads="searchNameResult && searchCompanyResult" />
   </div>
 </template>
 
@@ -35,7 +35,8 @@ export default {
   name: 'app',
   data() {
     return {
-      search: null,
+      searchName: null,
+      searchCompany: null,
       leads: []
     }
   },
@@ -52,33 +53,46 @@ export default {
     }
   },
   computed: {
-    searchLeadsResult() {
-      if (this.search) {
+    searchNameResult() {
+      if (this.searchName) {
         return this.leads.filter(lead => {
-          const phone = this.search
-            .toLowerCase()
-            .split(' ')
-            .every(valid => lead.phone.toLowerCase().includes(valid))
-          const email = this.search
-            .toLowerCase()
-            .split(' ')
-            .every(valid => lead.email.toLowerCase().includes(valid))
-          const name = this.search
+          const name = this.searchName
             .toLowerCase()
             .split(' ')
             .every(valid => lead.name.toLowerCase().includes(valid))
-          const bs = this.search
+          const phone = this.searchName
+            .toLowerCase()
+            .split(' ')
+            .every(valid => lead.phone.toLowerCase().includes(valid))
+          const email = this.searchName
+            .toLowerCase()
+            .split(' ')
+            .every(valid => lead.email.toLowerCase().includes(valid))
+          if (name) {
+            return name
+          }
+          if (phone) {
+            return phone
+          } else {
+            return email
+          }
+        })
+      }
+      return this.leads
+    },
+    searchCompanyResult() {
+      if (this.searchCompany) {
+        return this.leads.filter(lead => {
+          const companyName = this.searchCompany
+            .toLowerCase()
+            .split(' ')
+            .every(valid => lead.company.name.toLowerCase().includes(valid))
+          const bs = this.searchCompany
             .toLowerCase()
             .split(' ')
             .every(valid => lead.company.bs.toLowerCase().includes(valid))
-          if (phone) {
-            return phone
-          }
-          if (email) {
-            return email
-          }
-          if (name) {
-            return name
+          if (companyName) {
+            return companyName
           } else {
             return bs
           }
@@ -150,7 +164,7 @@ export default {
         color: $grey;
 
         /* TEXT */
-        font-size: 0.3rem;
+        font-size: 14px;
       }
     }
   }
