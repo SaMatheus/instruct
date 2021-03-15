@@ -17,7 +17,7 @@
           <span>Search for lead name</span>
         </label>
         <label for="searchForCompany">
-          <p>Company</p>
+          <p>Company category</p>
           <input
             id="searchForCompany"
             type="text"
