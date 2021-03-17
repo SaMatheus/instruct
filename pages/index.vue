@@ -6,7 +6,7 @@
       <h3>Filters</h3>
       <div>
         <label for="searchForName">
-          <p>Name</p>
+          <p>Contact name</p>
           <input
             id="searchForName"
             type="text"

@@ -1,8 +1,8 @@
 <template>
   <div class="list">
     <header>
-      <p>Name</p>
-      <p>Company category</p>
+      <p>Contact name:</p>
+      <p>Company category:</p>
     </header>
     <ul class="list__ul" v-for="lead in leads" :key="lead.id">
       <li
@@ -193,6 +193,10 @@ export default {
 
         /* FONT */
         font: 1.5rem 'trebuchet MS', 'lucida sans';
+
+        @media (max-width: 420px) {
+          height: 5rem;
+        }
       }
 
       p {
@@ -239,6 +243,7 @@ export default {
 
         @media (max-width: 420px) {
           padding-left: 0.2rem;
+          height: 5rem;
           &:nth-last-child(1) {
             padding: 0;
           }
