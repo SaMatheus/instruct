@@ -1,8 +1,8 @@
 <template>
   <div class="list">
     <header>
-      <p>Contact name:</p>
-      <p>Company category:</p>
+      <p>Name</p>
+      <p>Company category</p>
     </header>
     <ul class="list__ul" v-for="lead in leads" :key="lead.id">
       <li
