@@ -90,9 +90,6 @@ export default {
     }
   },
   methods: {
-    showList() {
-      this.show = true
-    },
     setVisibilityList() {
       this.isVisible = !this.isVisible
     }
